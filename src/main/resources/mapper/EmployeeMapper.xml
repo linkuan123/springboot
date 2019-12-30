@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nwpu.springboot.dao.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.nwpu.springboot.entity.Employee" >
+    <id column="emp_id" property="empId" jdbcType="BIGINT" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from employee
+    where emp_id = #{empId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nwpu.springboot.entity.Employee" >
+    insert into employee (emp_id, emp_name)
+    values (#{empId,jdbcType=BIGINT}, #{empName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nwpu.springboot.entity.Employee" >
+    update employee
+    set emp_name = #{empName,jdbcType=VARCHAR}
+    where emp_id = #{empId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select emp_id, emp_name
+    from employee
+    where emp_id = #{empId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select emp_id, emp_name
+    from employee
+  </select>
+</mapper>
